@@ -33,7 +33,6 @@ const Login = () => {
     setUserLogingLoading(true);
     logInUserHandler(email, password)
       .then(({ user }) => {
-        console.log(user);
         setLoddedInUserEmail(user?.email);
       })
       .catch((error) => {

@@ -8,7 +8,9 @@ const MobileBrands = () => {
   const { isLoading, data } = useQuery({
     queryKey: ["availableBrands"],
     queryFn: () =>
-      fetch("http://localhost:5000/api/v1/brands").then((res) => res.json()),
+      fetch("https://mobileyard-server.vercel.app/api/v1/brands").then((res) =>
+        res.json()
+      ),
   });
 
   return (

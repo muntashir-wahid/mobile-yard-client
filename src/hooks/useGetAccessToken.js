@@ -6,7 +6,7 @@ const useGetAccessToken = (email, registered) => {
   useEffect(() => {
     if (email) {
       fetch(
-        `http://localhost:5000/api/v1/jwt?email=${email}&registered=${registered}`
+        `https://mobileyard-server.vercel.app/api/v1/jwt?email=${email}&registered=${registered}`
       )
         .then((res) => res.json())
         .then((data) => {
