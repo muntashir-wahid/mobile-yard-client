@@ -40,7 +40,7 @@ const Login = () => {
         </form>
         <div className="w-full max-w-xs mx-auto">
           <p className="text-center">
-            New to MobileYard{" "}
+            New to <em className="font-medium">MobileYard</em>?{" "}
             <Link className="btn btn-link p-0" to="/register">
               Register
             </Link>
