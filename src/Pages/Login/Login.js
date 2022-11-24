@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import FormErrorMessage from "../../components/FormErrorMessage/FormErrorMessage";
 import { AuthContext } from "../../context/AuthProvider";
 import Loader from "../../components/Loader/Loader";
+import useGetAccessToken from "../../hooks/useGetAccessToken";
 
 const Login = () => {
   // ------ //
@@ -21,6 +22,9 @@ const Login = () => {
   const { logInUserHandler } = useContext(AuthContext);
   const [loginError, setLoginError] = useState("");
   const [userLogingLoding, setUserLogingLoading] = useState(false);
+  const [loggedInUserEmail, setLoddedInUserEmail] = useState("");
+  const [token] = useGetAccessToken(loggedInUserEmail, true);
+
   // ------------------- //
   // Form submit handler
   // ------------------- //
@@ -28,8 +32,9 @@ const Login = () => {
     const { email, password } = data;
     setUserLogingLoading(true);
     logInUserHandler(email, password)
-      .then((data) => {
-        // console.log(data);
+      .then(({ user }) => {
+        console.log(user);
+        setLoddedInUserEmail(user?.email);
       })
       .catch((error) => {
         setLoginError(error.message);

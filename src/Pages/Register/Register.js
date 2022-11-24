@@ -9,6 +9,7 @@ import { AuthContext } from "../../context/AuthProvider";
 import toast from "react-hot-toast";
 import Loader from "../../components/Loader/Loader";
 import useSaveUser from "../../hooks/useSaveUser";
+import useGetAccessToken from "../../hooks/useGetAccessToken";
 
 const Register = () => {
   // ------ //
@@ -27,6 +28,7 @@ const Register = () => {
 
   // Custome hooks
   const [savedUser] = useSaveUser(registeredUser);
+  const [token] = useGetAccessToken(registeredUser?.email, false);
 
   // ------------------- //
   // Form submit handler
@@ -62,7 +64,7 @@ const Register = () => {
       });
   };
 
-  if (savedUser) {
+  if (savedUser && token) {
     toast.success(
       `Congratulations ${savedUser.name}!You have created an account successfully!`
     );

@@ -9,6 +9,7 @@ const NavBar = () => {
     logOutHandler()
       .then(() => {
         console.log("user logout successfully");
+        localStorage.removeItem("accessToken");
       })
       .catch((err) => console.error(err));
   };
