@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthProvider";
 
 const NavBar = () => {
-  const { user } = useContext(AuthContext);
-  console.log(user);
+  // const { user } = useContext(AuthContext);
+  // console.log(user);
 
   return (
     <nav className="navbar bg-base-100">

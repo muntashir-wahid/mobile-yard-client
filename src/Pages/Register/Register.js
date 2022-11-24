@@ -1,27 +1,61 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import FromCard from "../../components/Cards/FromCard";
 import SecondaryHeading from "../../components/SectionHeadings/SecondaryHeading";
 import FormWrapper from "../../components/Wrappers/FormWrapper";
 import FormErrorMessage from "../../components/FormErrorMessage/FormErrorMessage";
+import { AuthContext } from "../../context/AuthProvider";
+import toast from "react-hot-toast";
+import Loader from "../../components/Loader/Loader";
 
 const Register = () => {
   // ------ //
   // Hooks
   // ------ //
+  const [registrationError, setRegistrationError] = useState("");
+  const [isRegistrationLoding, setIsRegistrationLoading] = useState(false);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { createUserHandler } = useContext(AuthContext);
 
   // ------------------- //
   // Form submit handler
   // ------------------- //
   const registerFormSubmitHandler = (data) => {
-    console.log(data);
+    const { displayName, email, password, accountType } = data;
+
+    setRegistrationError("");
+    setIsRegistrationLoading(true);
+    createUserHandler(email, password)
+      .then(({ user }) => {
+        // Firebase registration
+        toast.success(
+          `Congratulations!${displayName} have created an account successfully!`
+        );
+        navigate("/");
+      })
+      .catch((error) => {
+        // Catch firebase registration error
+        setRegistrationError(error.message);
+      })
+      .finally(() => {
+        setIsRegistrationLoading(false);
+      });
   };
+
+  if (isRegistrationLoding) {
+    return (
+      <Loader
+        className="min-h-screen w-full"
+        message="Please wait! Account is creating..."
+      />
+    );
+  }
 
   return (
     <FormWrapper>
@@ -88,7 +122,7 @@ const Register = () => {
               <span className="label-text">Account type</span>
             </label>
             <select
-              {...register("accounType")}
+              {...register("accountType")}
               defaultValue="user"
               className="select select-bordered"
             >
@@ -100,6 +134,7 @@ const Register = () => {
             <input type="submit" className="btn btn-primary" value="Register" />
           </div>
         </form>
+        {registrationError && <FormErrorMessage message={registrationError} />}
         <div className="w-full max-w-md mx-auto">
           <p className="text-center">
             Already have an account?{" "}
