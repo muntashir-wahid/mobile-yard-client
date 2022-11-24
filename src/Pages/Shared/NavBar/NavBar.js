@@ -35,7 +35,9 @@ const NavBar = () => {
             </li>
           </ul>
         </div>
-        <a className="btn btn-ghost normal-case text-xl">MobileYard</a>
+        <Link to="/" className="text-primary normal-case text-xl font-semibold">
+          MobileYard
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal p-0">
