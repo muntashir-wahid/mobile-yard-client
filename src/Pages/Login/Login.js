@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import FromCard from "../../components/Cards/FromCard";
@@ -6,6 +6,8 @@ import SecondaryHeading from "../../components/SectionHeadings/SecondaryHeading"
 import FormWrapper from "../../components/Wrappers/FormWrapper";
 import { useForm } from "react-hook-form";
 import FormErrorMessage from "../../components/FormErrorMessage/FormErrorMessage";
+import { AuthContext } from "../../context/AuthProvider";
+import Loader from "../../components/Loader/Loader";
 
 const Login = () => {
   // ------ //
@@ -16,13 +18,31 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
+  const { logInUserHandler } = useContext(AuthContext);
+  const [loginError, setLoginError] = useState("");
+  const [userLogingLoding, setUserLogingLoading] = useState(false);
   // ------------------- //
   // Form submit handler
   // ------------------- //
   const loginFormSubmitHandler = (data) => {
-    console.log(data);
+    const { email, password } = data;
+    setUserLogingLoading(true);
+    logInUserHandler(email, password)
+      .then((data) => {
+        // console.log(data);
+      })
+      .catch((error) => {
+        setLoginError(error.message);
+      })
+      .finally(() => {
+        setUserLogingLoading(false);
+      });
   };
+
+  if (userLogingLoding) {
+    return <Loader className="min-h-screen" message="Please wait!Loging..." />;
+  }
+
   return (
     <FormWrapper>
       <SecondaryHeading>Please Login</SecondaryHeading>
@@ -69,9 +89,9 @@ const Login = () => {
             )}
           </div>
 
-          {/* <div className="max-w-xs mx-auto mt-4">
-          <p className="text-right btn btn-link">Forget Password</p>
-        </div> */}
+          <div className="max-w-xs mx-auto mt-4">
+            {loginError && <FormErrorMessage message={loginError} />}
+          </div>
           <div className="form-control w-full max-w-xs mx-auto mt-6">
             <input type="submit" className="btn btn-primary" value="Login" />
           </div>

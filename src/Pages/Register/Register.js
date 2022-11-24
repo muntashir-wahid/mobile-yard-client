@@ -8,6 +8,7 @@ import FormErrorMessage from "../../components/FormErrorMessage/FormErrorMessage
 import { AuthContext } from "../../context/AuthProvider";
 import toast from "react-hot-toast";
 import Loader from "../../components/Loader/Loader";
+import useSaveUser from "../../hooks/useSaveUser";
 
 const Register = () => {
   // ------ //
@@ -15,13 +16,17 @@ const Register = () => {
   // ------ //
   const [registrationError, setRegistrationError] = useState("");
   const [isRegistrationLoding, setIsRegistrationLoading] = useState(false);
+  const [registeredUser, setRegisteredUser] = useState(null);
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { createUserHandler } = useContext(AuthContext);
+  const { createUserHandler, updateUserHandler } = useContext(AuthContext);
+
+  // Custome hooks
+  const [savedUser] = useSaveUser(registeredUser);
 
   // ------------------- //
   // Form submit handler
@@ -32,12 +37,21 @@ const Register = () => {
     setRegistrationError("");
     setIsRegistrationLoading(true);
     createUserHandler(email, password)
-      .then(({ user }) => {
-        // Firebase registration
-        toast.success(
-          `Congratulations!${displayName} have created an account successfully!`
-        );
-        navigate("/");
+      // Firebase registration
+      .then(() => {
+        updateUserHandler(displayName)
+          // Update user in firebase
+          .then(() => {
+            const newUser = {
+              name: displayName,
+              email,
+              accountType,
+            };
+            setRegisteredUser(newUser);
+          })
+          .catch((error) => {
+            setRegistrationError(error.message);
+          });
       })
       .catch((error) => {
         // Catch firebase registration error
@@ -47,6 +61,13 @@ const Register = () => {
         setIsRegistrationLoading(false);
       });
   };
+
+  if (savedUser) {
+    toast.success(
+      `Congratulations ${savedUser.name}!You have created an account successfully!`
+    );
+    navigate("/");
+  }
 
   if (isRegistrationLoding) {
     return (

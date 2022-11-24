@@ -1,9 +1,8 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
-  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
@@ -14,10 +13,10 @@ import app from "../firebase/firebase.config";
 const defaultContext = {
   user: {},
   createUserHandler(email, password) {},
-  updateUserHandler() {},
-  signInUserHandler() {},
+  updateUserHandler(displayName) {},
+  logInUserHandler(email, password) {},
   passwordResetHandler() {},
-  signOutHandler() {},
+  logOutHandler() {},
 };
 
 // Exported auth context object
@@ -41,8 +40,45 @@ const AuthProvider = ({ children }) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
+  // Update user display name
+  const updateUserHandler = (displayName) => {
+    setIsLoading(true);
+    return updateProfile(auth.currentUser, {
+      displayName: displayName,
+    });
+  };
+
+  // Login user
+  const logInUserHandler = (email, password) => {
+    setIsLoading(true);
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  // Logut user
+  const logOutHandler = () => {
+    setIsLoading(true);
+    return signOut(auth);
+  };
+
+  // Observe auth state change
+  useEffect(() => {
+    const unSubscribe = onAuthStateChanged(auth, (currUser) => {
+      setUser(currUser);
+      setIsLoading(false);
+    });
+
+    return () => unSubscribe();
+  }, []);
+
   // Auth object value
-  const authInfo = { createUserHandler };
+  const authInfo = {
+    user,
+    isLoading,
+    createUserHandler,
+    updateUserHandler,
+    logOutHandler,
+    logInUserHandler,
+  };
 
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
