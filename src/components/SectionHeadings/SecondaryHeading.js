@@ -2,7 +2,7 @@ import React from "react";
 
 const SecondaryHeading = ({ children, className }) => {
   return (
-    <h2 className={`text-3xl font-semibold text-center mb-6 ${className}`}>
+    <h2 className={`text-4xl font-semibold text-center mb-6 ${className}`}>
       {children}
     </h2>
   );
