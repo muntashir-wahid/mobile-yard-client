@@ -1,10 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import FormErrorMessage from "../../../../components/FormErrorMessage/FormErrorMessage";
+import Loader from "../../../../components/Loader/Loader";
 import SecondaryHeading from "../../../../components/SectionHeadings/SecondaryHeading";
 
 const AddAPhone = () => {
+  const [isPhonePosting, setIsPhonePosting] = useState(false);
+  const navigate = useNavigate();
   const { isLoading, data } = useQuery({
     queryKey: ["categories"],
     queryFn: () =>
@@ -29,8 +34,10 @@ const AddAPhone = () => {
 
     formData.append("image", image);
 
+    setIsPhonePosting(true);
+
     fetch(
-      `https://api.imgbb.com/1/upload?expiration=600&key=${process.env.REACT_APP_IMAGEBB_KEY}`,
+      `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMAGEBB_KEY}`,
       {
         method: "POST",
         body: formData,
@@ -41,10 +48,31 @@ const AddAPhone = () => {
         if (imageData.success) {
           const phone = { ...data, ...extraInfo };
           phone.image = imageData?.data?.url;
-          console.log(phone);
+          fetch("http://localhost:5000/api/v1/phones", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+            body: JSON.stringify(phone),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data?.success) {
+                setIsPhonePosting(false);
+                toast.success(
+                  `You have posted ${data?.data?.phone?.phoneName}`
+                );
+                navigate("/dashboard/my-phones");
+              }
+            });
         }
       });
   };
+
+  if (isPhonePosting) {
+    return <Loader className="min-h-screen" />;
+  }
 
   return (
     <div className="px-4 my-10">

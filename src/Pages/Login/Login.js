@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import FromCard from "../../components/Cards/FromCard";
 import SecondaryHeading from "../../components/SectionHeadings/SecondaryHeading";
@@ -25,6 +25,12 @@ const Login = () => {
   const [userLogingLoding, setUserLogingLoading] = useState(false);
   const [loggedInUserEmail, setLoddedInUserEmail] = useState("");
   const [token] = useGetAccessToken(loggedInUserEmail, true);
+
+  const navigate = useNavigate();
+
+  if (token) {
+    navigate("/");
+  }
 
   // ------------------- //
   // Form submit handler

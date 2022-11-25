@@ -25,7 +25,13 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       {
         path: "/available-brands/:brandId",
-        element: <AvailableMobiles />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/api/v1/phones/${params.brandId}`),
+        element: (
+          <PrivateRoute>
+            <AvailableMobiles />
+          </PrivateRoute>
+        ),
       },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },

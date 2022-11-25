@@ -5,6 +5,7 @@ const useGetAccessToken = (email, registered) => {
 
   useEffect(() => {
     if (email) {
+      console.log("go for token");
       fetch(
         `https://mobileyard-server.vercel.app/api/v1/jwt?email=${email}&registered=${registered}`
       )
