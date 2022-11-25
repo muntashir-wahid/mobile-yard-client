@@ -8,7 +8,7 @@ const DashboardLayout = () => {
   return (
     <main>
       <DashBoardTopNav />
-      <div className="drawer drawer-mobile">
+      <div className="drawer drawer-mobile overflow-visible">
         <input
           id="dashboard-drawer"
           type="checkbox"

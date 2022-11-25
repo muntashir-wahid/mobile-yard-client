@@ -23,7 +23,10 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <Home /> },
-      { path: "/available-brands/:brandId", element: <AvailableMobiles /> },
+      {
+        path: "/available-brands/:brandId",
+        element: <AvailableMobiles />,
+      },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
       { path: "/blog", element: <Blog /> },

@@ -10,7 +10,7 @@ const DashBoardSideNav = () => {
   return (
     <aside className="drawer-side">
       <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
-      <ul className="menu p-4 w-80 bg-base-100 text-base-content">
+      <ul className="menu h-full p-4 w-80 bg-base-300 lg:bg-base-200 text-base-content">
         <li>
           <Link to="/dashboard">My Profile</Link>
         </li>

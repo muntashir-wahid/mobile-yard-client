@@ -14,6 +14,7 @@ const Login = () => {
   // ------ //
   // Hooks
   // ------ //
+  console.log("came to login page");
   const {
     register,
     handleSubmit,
