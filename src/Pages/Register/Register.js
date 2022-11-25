@@ -24,7 +24,8 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { createUserHandler, updateUserHandler } = useContext(AuthContext);
+  const { createUserHandler, updateUserHandler, setIsLoading } =
+    useContext(AuthContext);
 
   // Custome hooks
   const [savedUser] = useSaveUser(registeredUser);
@@ -61,6 +62,7 @@ const Register = () => {
       })
       .finally(() => {
         setIsRegistrationLoading(false);
+        setIsLoading(false);
       });
   };
 

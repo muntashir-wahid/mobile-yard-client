@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+import React, { Fragment, useContext } from "react";
 import { Link } from "react-router-dom";
-
+import { MdDashboard } from "react-icons/md";
 import { AuthContext } from "../../../context/AuthProvider";
 
-const NavBar = () => {
+const DashBoardTopNav = () => {
   const { user, logOutHandler } = useContext(AuthContext);
 
   const userLogoutHandler = () => {
@@ -74,12 +74,20 @@ const NavBar = () => {
       </div>
       <div className="navbar-end">
         {user?.uid ? (
-          <button
-            onClick={userLogoutHandler}
-            className="btn btn-primary btn-outline mr-4"
-          >
-            Logout
-          </button>
+          <Fragment>
+            <button
+              onClick={userLogoutHandler}
+              className="btn btn-primary btn-outline mr-4"
+            >
+              Logout
+            </button>
+            <label
+              htmlFor="dashboard-drawer"
+              className="btn btn-primary drawer-button lg:hidden"
+            >
+              <MdDashboard className="text-3xl" />
+            </label>
+          </Fragment>
         ) : (
           <Link to="/login" className="btn btn-primary btn-outline">
             Get Login
@@ -90,4 +98,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default DashBoardTopNav;
