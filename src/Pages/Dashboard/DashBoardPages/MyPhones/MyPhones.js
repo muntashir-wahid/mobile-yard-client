@@ -8,6 +8,7 @@ import { AuthContext } from "../../../../context/AuthProvider";
 const MyPhones = () => {
   const { user } = useContext(AuthContext);
 
+  // Load all posted phones
   const { isLoading, data, refetch } = useQuery({
     queryKey: ["sellerAllPhones", user?.email],
     queryFn: async () => {
@@ -24,6 +25,7 @@ const MyPhones = () => {
     },
   });
 
+  // Delete a posted phone
   const phoneDeleteHandler = (detetePhone) => {
     fetch(
       `https://mobileyard-server.vercel.app/api/v1/phones/${detetePhone._id}`,
@@ -40,6 +42,27 @@ const MyPhones = () => {
           toast.success(`You have deleted ${detetePhone.phoneName}!`);
           refetch();
         }
+      });
+  };
+
+  // Advertise a posted phone
+  const advertisePhoneHandler = (advertisePhone) => {
+    fetch(
+      `http://localhost:5000/api/v1/phones/${advertisePhone._id}?advertise=true`,
+      {
+        method: "PATCH",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.acknowledged && data?.modifiedCount) {
+          toast.success(`Done advertisement on ${advertisePhone.phoneName}!`);
+          refetch();
+        }
+        console.log(data);
       });
   };
 
@@ -76,12 +99,25 @@ const MyPhones = () => {
                 <tr key={phone._id}>
                   <th>{index + 1}</th>
                   <td>{phone.phoneName}</td>
-                  <td>{phone.state === "available" ? "Unsold" : "Sold"}</td>
+                  <td>
+                    {phone.state === "available" ? (
+                      <span className="badge badge-secondary">Unsold</span>
+                    ) : (
+                      <span className="badge badge-success">Sold</span>
+                    )}
+                  </td>
                   <td>${phone.resellingPrice}</td>
                   <td>
-                    <button className="btn btn-sm btn-secondary">
-                      Advertise
-                    </button>
+                    {phone.isAdvertised ? (
+                      <span className="badge badge-success">Advertised</span>
+                    ) : (
+                      <button
+                        onClick={advertisePhoneHandler.bind(null, phone)}
+                        className="btn btn-sm btn-secondary"
+                      >
+                        Advertise
+                      </button>
+                    )}
                   </td>
                   <td>
                     <button
