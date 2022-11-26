@@ -1,5 +1,7 @@
 import React, { Fragment, useContext } from "react";
+import axios from "axios";
 import { AuthContext } from "../../../context/AuthProvider";
+import toast from "react-hot-toast";
 
 const PhoneBookingModal = ({ bookingPhone, onClose }) => {
   const { user } = useContext(AuthContext);
@@ -22,8 +24,22 @@ const PhoneBookingModal = ({ bookingPhone, onClose }) => {
       meetingLocation,
       price,
     };
-    console.log(bookingInfo);
-    // onClose(null, null);
+
+    axios
+      .post("http://localhost:5000/api/v1/bookings", bookingInfo, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then(({ data }) => {
+        onClose(null, null);
+        if (data?.success) {
+          toast.success(`You have booked ${data?.data?.booking.bookingItem}`);
+        }
+        if (!data.success) {
+          toast.error(data.message);
+        }
+      });
   };
 
   return (
