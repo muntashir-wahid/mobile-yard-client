@@ -12,7 +12,7 @@ const MyPhones = () => {
     queryKey: ["sellerAllPhones", user?.email],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/api/v1/phones?email=${user?.email}`,
+        `https://mobileyard-server.vercel.app/api/v1/phones?email=${user?.email}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -25,12 +25,15 @@ const MyPhones = () => {
   });
 
   const phoneDeleteHandler = (detetePhone) => {
-    fetch(`http://localhost:5000/api/v1/phones/${detetePhone._id}`, {
-      method: "DELETE",
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
+    fetch(
+      `https://mobileyard-server.vercel.app/api/v1/phones/${detetePhone._id}`,
+      {
+        method: "DELETE",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data?.acknowledged && data?.deletedCount) {

@@ -27,11 +27,15 @@ const PhoneBookingModal = ({ bookingPhone, onClose }) => {
     };
 
     axios
-      .post("http://localhost:5000/api/v1/bookings", bookingInfo, {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
+      .post(
+        "https://mobileyard-server.vercel.app/api/v1/bookings",
+        bookingInfo,
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
       .then(({ data }) => {
         onClose(null, null);
         if (data?.success) {

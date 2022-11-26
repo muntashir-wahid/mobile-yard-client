@@ -7,7 +7,7 @@ const useCheckUserType = (email) => {
   useEffect(() => {
     if (email) {
       setIsUserLoading(true);
-      fetch(`http://localhost:5000/api/v1/users?email=${email}`)
+      fetch(`https://mobileyard-server.vercel.app/api/v1/users?email=${email}`)
         .then((res) => res.json())
         .then((data) => {
           if (data?.success) {

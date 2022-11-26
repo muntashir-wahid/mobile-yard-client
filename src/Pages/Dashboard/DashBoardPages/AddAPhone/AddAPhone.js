@@ -16,7 +16,9 @@ const AddAPhone = () => {
   const { isLoading, data } = useQuery({
     queryKey: ["categories"],
     queryFn: () =>
-      fetch("http://localhost:5000/api/v1/brands").then((res) => res.json()),
+      fetch("https://mobileyard-server.vercel.app/api/v1/brands").then((res) =>
+        res.json()
+      ),
   });
 
   const {
@@ -52,7 +54,7 @@ const AddAPhone = () => {
           const phone = { ...data, ...extraInfo };
           phone.image = imageData?.data?.url;
           phone.sellerEmail = user?.email;
-          fetch("http://localhost:5000/api/v1/phones", {
+          fetch("https://mobileyard-server.vercel.app/api/v1/phones", {
             method: "POST",
             headers: {
               "content-type": "application/json",

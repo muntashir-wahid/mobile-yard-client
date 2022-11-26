@@ -26,7 +26,9 @@ const router = createBrowserRouter([
       {
         path: "/available-brands/:brandId",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/api/v1/phones/${params.brandId}`),
+          fetch(
+            `https://mobileyard-server.vercel.app/api/v1/phones/${params.brandId}`
+          ),
         element: (
           <PrivateRoute>
             <AvailableMobiles />

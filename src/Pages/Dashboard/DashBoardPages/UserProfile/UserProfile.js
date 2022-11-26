@@ -9,9 +9,9 @@ const UserProfile = () => {
   const { isLoading, data } = useQuery({
     queryKey: ["userProfileInfo", user?.email],
     queryFn: () =>
-      fetch(`http://localhost:5000/api/v1/users?email=${user?.email}`).then(
-        (res) => res.json()
-      ),
+      fetch(
+        `https://mobileyard-server.vercel.app/api/v1/users?email=${user?.email}`
+      ).then((res) => res.json()),
   });
 
   return (
