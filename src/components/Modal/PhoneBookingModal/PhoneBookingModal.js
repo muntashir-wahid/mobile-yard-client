@@ -1,0 +1,135 @@
+import React, { Fragment, useContext } from "react";
+import { AuthContext } from "../../../context/AuthProvider";
+
+const PhoneBookingModal = ({ bookingPhone, onClose }) => {
+  const { user } = useContext(AuthContext);
+  const { phoneName, resellingPrice } = bookingPhone;
+
+  const bookingFormSubmitHandler = (event) => {
+    event.preventDefault();
+    const bookingForm = event.target;
+    const bookerName = bookingForm.bookerName.value;
+    const bookerEmail = bookingForm.bookerEmail.value;
+    const bookingItem = bookingForm.bookingItem.value;
+    const price = bookingForm.price.value;
+    const bookerContact = bookingForm.bookerContact.value;
+    const meetingLocation = bookingForm.meetingLocation.value;
+    const bookingInfo = {
+      bookerContact,
+      bookerName,
+      bookerEmail,
+      bookingItem,
+      meetingLocation,
+      price,
+    };
+    console.log(bookingInfo);
+    // onClose(null, null);
+  };
+
+  return (
+    <Fragment>
+      <input
+        type="checkbox"
+        id="phone-booking-modal"
+        className="modal-toggle"
+      />
+      <div className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg mb-4">Book {phoneName}</h3>
+          <form
+            onSubmit={bookingFormSubmitHandler}
+            className="max-w-sm mx-auto p-2"
+          >
+            <div className="form-control w-full max-w-xs">
+              <label className="label">
+                <span className="label-text">Your name?</span>
+              </label>
+              <input
+                name="bookerName"
+                type="text"
+                defaultValue={user?.displayName}
+                readOnly
+                className="input input-bordered w-full max-w-xs"
+              />
+            </div>
+            <div className="form-control w-full max-w-xs">
+              <label className="label">
+                <span className="label-text">Your email?</span>
+              </label>
+              <input
+                name="bookerEmail"
+                type="text"
+                defaultValue={user?.email}
+                readOnly
+                className="input input-bordered w-full max-w-xs"
+              />
+            </div>
+            <div className="form-control w-full max-w-xs">
+              <label className="label">
+                <span className="label-text">Phone name or modal</span>
+              </label>
+              <input
+                name="bookingItem"
+                type="text"
+                defaultValue={phoneName}
+                readOnly
+                className="input input-bordered w-full max-w-xs"
+              />
+            </div>
+            <div className="form-control w-full max-w-xs">
+              <label className="label">
+                <span className="label-text">Phone price</span>
+              </label>
+              <input
+                name="price"
+                type="number"
+                defaultValue={resellingPrice}
+                readOnly
+                className="input input-bordered w-full max-w-xs"
+              />
+            </div>
+            <div className="form-control w-full max-w-xs">
+              <label className="label">
+                <span className="label-text">Contact No.</span>
+              </label>
+              <input
+                name="bookerContact"
+                type="tel"
+                placeholder="017********"
+                className="input input-bordered w-full max-w-xs"
+                required
+              />
+            </div>
+            <div className="form-control w-full max-w-xs">
+              <label className="label">
+                <span className="label-text">Meeting location</span>
+              </label>
+              <input
+                name="meetingLocation"
+                type="text"
+                placeholder="Dhaka"
+                required
+                className="input input-bordered w-full max-w-xs"
+              />
+            </div>
+            <div className="modal-action">
+              <button
+                onClick={onClose.bind(null, null)}
+                className="btn btn-error btn-outline"
+              >
+                Close
+              </button>
+              <input
+                type="submit"
+                className="btn btn-primary btn-outline"
+                value="Confirm Booking"
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+    </Fragment>
+  );
+};
+
+export default PhoneBookingModal;

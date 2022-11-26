@@ -1,6 +1,6 @@
 import React from "react";
 
-const PhoneCard = ({ phone }) => {
+const PhoneCard = ({ phone, onBookPhone }) => {
   const {
     phoneName,
     image,
@@ -29,12 +29,18 @@ const PhoneCard = ({ phone }) => {
           Posted at {date} by {sellerName}
         </p>
         <p>Posted from {sellerLocation}</p>
-        <p>Resale price: {resellingPrice}</p>
-        <p>Original price: {originalPrice}</p>
+        <p>Resale price: ${resellingPrice}</p>
+        <p>Original price: ${originalPrice}</p>
         <p>Years of used: {usedYears}year(s) </p>
         <p>{description}</p>
         <div className="card-actions justify-end">
-          <button className="btn btn-primary">Book now</button>
+          <label
+            onClick={onBookPhone.bind(null, phone)}
+            htmlFor="phone-booking-modal"
+            className="btn btn-primary"
+          >
+            Book now
+          </label>
         </div>
       </div>
     </div>
