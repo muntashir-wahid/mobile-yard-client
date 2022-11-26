@@ -11,6 +11,7 @@ import { AuthContext } from "../../../../context/AuthProvider";
 const AddAPhone = () => {
   const [isPhonePosting, setIsPhonePosting] = useState(false);
   const { user } = useContext(AuthContext);
+
   const navigate = useNavigate();
   const { isLoading, data } = useQuery({
     queryKey: ["categories"],
@@ -50,6 +51,7 @@ const AddAPhone = () => {
         if (imageData.success) {
           const phone = { ...data, ...extraInfo };
           phone.image = imageData?.data?.url;
+          phone.sellerEmail = user?.email;
           fetch("http://localhost:5000/api/v1/phones", {
             method: "POST",
             headers: {
@@ -88,7 +90,7 @@ const AddAPhone = () => {
           <input
             {...register("sellerName", { required: "Name is required" })}
             type="text"
-            placeholder="Muntashir Wahid"
+            placeholder={user?.displayName}
             className="input input-bordered w-full max-w-md"
           />
           {errors?.sellerName && (
@@ -100,13 +102,14 @@ const AddAPhone = () => {
             <span className="label-text">Your Email</span>
           </label>
           <input
-            {...register("sellerEmail")}
-            type="text"
-            defaultValue={user?.email}
-            readOnly
-            disabled
+            {...register("sellerEmail", { required: "Email is required" })}
+            type="email"
+            placeholder={user?.email}
             className="input input-bordered w-full max-w-md"
           />
+          {errors?.sellerEmail && (
+            <FormErrorMessage message={errors?.sellerEmail?.message} />
+          )}
         </div>
         <div className="form-control w-full max-w-md">
           <label className="label">
@@ -142,11 +145,11 @@ const AddAPhone = () => {
         </div>
         <div className="form-control w-full max-w-md">
           <label className="label">
-            <span className="label-text">Phone Name or Modal</span>
+            <span className="label-text">Phone Name or Model</span>
           </label>
           <input
             {...register("phoneName", {
-              required: "Phone name or modal is required",
+              required: "Phone name or model is required",
             })}
             type="text"
             placeholder="iPhone 12"
@@ -158,7 +161,7 @@ const AddAPhone = () => {
         </div>
         <div className="form-control w-full max-w-md">
           <label className="label">
-            <span className="label-text">Phone Original Price</span>
+            <span className="label-text">Phone Original Price(in dollar)</span>
           </label>
           <input
             {...register("originalPrice", {
@@ -174,7 +177,7 @@ const AddAPhone = () => {
         </div>
         <div className="form-control w-full max-w-md">
           <label className="label">
-            <span className="label-text">Phone Reselling price</span>
+            <span className="label-text">Phone Reselling price(in dollar)</span>
           </label>
           <input
             {...register("resellingPrice", {

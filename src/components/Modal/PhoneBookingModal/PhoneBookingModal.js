@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 
 const PhoneBookingModal = ({ bookingPhone, onClose }) => {
   const { user } = useContext(AuthContext);
-  const { phoneName, resellingPrice } = bookingPhone;
+  const { _id: itemId, phoneName, resellingPrice } = bookingPhone;
 
   const bookingFormSubmitHandler = (event) => {
     event.preventDefault();
@@ -21,6 +21,7 @@ const PhoneBookingModal = ({ bookingPhone, onClose }) => {
       bookerName,
       bookerEmail,
       bookingItem,
+      itemId,
       meetingLocation,
       price,
     };
