@@ -48,7 +48,7 @@ const MyPhones = () => {
   // Advertise a posted phone
   const advertisePhoneHandler = (advertisePhone) => {
     fetch(
-      `http://localhost:5000/api/v1/phones/${advertisePhone._id}?advertise=true`,
+      `https://mobileyard-server.vercel.app/api/v1/phones/${advertisePhone._id}?advertise=true`,
       {
         method: "PATCH",
         headers: {

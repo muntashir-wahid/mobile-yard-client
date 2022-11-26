@@ -12,15 +12,13 @@ const AdvertisedPhones = () => {
     queryKey: ["advertisedPhones"],
     queryFn: async () => {
       const res = await fetch(
-        "http://localhost:5000/api/v1/phones?isAdvertised=true"
+        "https://mobileyard-server.vercel.app/api/v1/phones?isAdvertised=true"
       );
 
       const data = await res.json();
       return data;
     },
   });
-
-  console.log(data, isLoading);
 
   return (
     <SectionWrapper className="px-4 py-12">
