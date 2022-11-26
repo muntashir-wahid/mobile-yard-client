@@ -65,6 +65,7 @@ const PhoneBookingModal = ({ bookingPhone, onClose }) => {
                 type="text"
                 defaultValue={user?.displayName}
                 readOnly
+                disabled
                 className="input input-bordered w-full max-w-xs"
               />
             </div>
@@ -74,7 +75,8 @@ const PhoneBookingModal = ({ bookingPhone, onClose }) => {
               </label>
               <input
                 name="bookerEmail"
-                type="text"
+                type="email"
+                disabled
                 defaultValue={user?.email}
                 readOnly
                 className="input input-bordered w-full max-w-xs"
@@ -89,6 +91,7 @@ const PhoneBookingModal = ({ bookingPhone, onClose }) => {
                 type="text"
                 defaultValue={phoneName}
                 readOnly
+                disabled
                 className="input input-bordered w-full max-w-xs"
               />
             </div>
@@ -101,6 +104,7 @@ const PhoneBookingModal = ({ bookingPhone, onClose }) => {
                 type="number"
                 defaultValue={resellingPrice}
                 readOnly
+                disabled
                 className="input input-bordered w-full max-w-xs"
               />
             </div>

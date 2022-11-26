@@ -1,14 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import FormErrorMessage from "../../../../components/FormErrorMessage/FormErrorMessage";
 import Loader from "../../../../components/Loader/Loader";
 import SecondaryHeading from "../../../../components/SectionHeadings/SecondaryHeading";
+import { AuthContext } from "../../../../context/AuthProvider";
 
 const AddAPhone = () => {
   const [isPhonePosting, setIsPhonePosting] = useState(false);
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const { isLoading, data } = useQuery({
     queryKey: ["categories"],
@@ -98,14 +100,13 @@ const AddAPhone = () => {
             <span className="label-text">Your Email</span>
           </label>
           <input
-            {...register("sellerEmail", { required: "Email is required" })}
+            {...register("sellerEmail")}
             type="text"
-            placeholder="example@email.com"
+            defaultValue={user?.email}
+            readOnly
+            disabled
             className="input input-bordered w-full max-w-md"
           />
-          {errors?.sellerEmail && (
-            <FormErrorMessage message={errors?.sellerEmail?.message} />
-          )}
         </div>
         <div className="form-control w-full max-w-md">
           <label className="label">
@@ -205,7 +206,7 @@ const AddAPhone = () => {
         </div>
         <div className="form-control w-full max-w-md">
           <label className="label">
-            <span className="label-text">Years of use</span>
+            <span className="label-text">Phone condition</span>
           </label>
           <select
             {...register("phoneCondition")}
