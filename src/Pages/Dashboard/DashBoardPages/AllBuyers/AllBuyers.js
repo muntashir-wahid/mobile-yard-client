@@ -9,7 +9,7 @@ const AllBuyers = () => {
     queryKey: ["allBuyers"],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/api/v1/users?accountType=user`
+        `https://mobileyard-server.vercel.app/api/v1/users?accountType=user`
       );
       const data = await res.json();
       return data;
@@ -21,7 +21,7 @@ const AllBuyers = () => {
   // -------------- //
 
   const deleteBuyerHandler = (buyer) => {
-    fetch(`http://localhost:5000/api/v1/users/${buyer._id}`, {
+    fetch(`https://mobileyard-server.vercel.app/api/v1/users/${buyer._id}`, {
       method: "DELETE",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
