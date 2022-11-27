@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import toast from "react-hot-toast";
 import Loader from "../../../../components/Loader/Loader";
 import SecondaryHeading from "../../../../components/SectionHeadings/SecondaryHeading";
 
 const AllBuyers = () => {
-  const { isLoading, data } = useQuery({
+  const { isLoading, data, refetch } = useQuery({
     queryKey: ["allBuyers"],
     queryFn: async () => {
       const res = await fetch(
@@ -14,6 +15,26 @@ const AllBuyers = () => {
       return data;
     },
   });
+
+  // -------------- //
+  // Delete a buyer
+  // -------------- //
+
+  const deleteBuyerHandler = (buyer) => {
+    fetch(`http://localhost:5000/api/v1/users/${buyer._id}`, {
+      method: "DELETE",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.result?.acknowledged && data?.result?.deletedCount) {
+          toast.success(`You have deleted ${buyer.name}.`);
+          refetch();
+        }
+      });
+  };
 
   if (isLoading) {
     return (
@@ -48,7 +69,14 @@ const AllBuyers = () => {
                   <td>{user.name}</td>
                   <td>{user.email}</td>
                   <td>
-                    {<button className="btn btn-sm btn-error">Delete</button>}
+                    {
+                      <button
+                        onClick={deleteBuyerHandler.bind(null, user)}
+                        className="btn btn-sm btn-error"
+                      >
+                        Delete
+                      </button>
+                    }
                   </td>
                 </tr>
               ))}
