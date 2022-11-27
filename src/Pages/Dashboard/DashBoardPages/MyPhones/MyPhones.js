@@ -62,7 +62,6 @@ const MyPhones = () => {
           toast.success(`Done advertisement on ${advertisePhone.phoneName}!`);
           refetch();
         }
-        console.log(data);
       });
   };
 
