@@ -4,14 +4,18 @@ import Main from "../../Layout/Main";
 import AvailableMobiles from "../../Pages/AvailableMobiles/AvailableMobiles/AvailableMobiles";
 import Blog from "../../Pages/Blog/Blog";
 import AddAPhone from "../../Pages/Dashboard/DashBoardPages/AddAPhone/AddAPhone";
+import AllBuyers from "../../Pages/Dashboard/DashBoardPages/AllBuyers/AllBuyers";
+import AllSellers from "../../Pages/Dashboard/DashBoardPages/AllSellers/AllSellers";
 import MyBuyers from "../../Pages/Dashboard/DashBoardPages/MyBuyers/MyBuyers";
 import MyOrders from "../../Pages/Dashboard/DashBoardPages/MyOrders/MyOrders";
 import MyPhones from "../../Pages/Dashboard/DashBoardPages/MyPhones/MyPhones";
+import ReportedPhones from "../../Pages/Dashboard/DashBoardPages/ReportedPhones/ReportedPhones";
 import UserProfile from "../../Pages/Dashboard/DashBoardPages/UserProfile/UserProfile";
 import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import Register from "../../Pages/Register/Register";
+import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import SellerRoute from "../SellerRoute/SellerRoute";
 import UserRoute from "../UserRoute/UserRoute";
@@ -80,6 +84,30 @@ const router = createBrowserRouter([
           <SellerRoute>
             <MyBuyers />
           </SellerRoute>
+        ),
+      },
+      {
+        path: "/dashboard/all-sellers",
+        element: (
+          <AdminRoute>
+            <AllSellers />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/all-buyers",
+        element: (
+          <AdminRoute>
+            <AllBuyers />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/reported-phones",
+        element: (
+          <AdminRoute>
+            <ReportedPhones />
+          </AdminRoute>
         ),
       },
     ],

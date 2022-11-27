@@ -19,7 +19,7 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { logInUserHandler } = useContext(AuthContext);
+  const { logInUserHandler, logInWithGoogleHandler } = useContext(AuthContext);
   const [loginError, setLoginError] = useState("");
   const [userLogingLoding, setUserLogingLoading] = useState(false);
   const [loggedInUserEmail, setLoddedInUserEmail] = useState("");
@@ -48,6 +48,10 @@ const Login = () => {
       .finally(() => {
         setUserLogingLoading(false);
       });
+  };
+
+  const handleGoogleSignIn = () => {
+    console.log(logInWithGoogleHandler);
   };
 
   if (userLogingLoding) {
@@ -115,7 +119,10 @@ const Login = () => {
             </Link>
           </p>
           <div className="divider">OR</div>
-          <button className="btn btn-primary btn-outline w-full mt-2">
+          <button
+            onClick={handleGoogleSignIn}
+            className="btn btn-primary btn-outline w-full mt-2"
+          >
             <FcGoogle className="mr-1 text-lg" />
             Signin With Google
           </button>

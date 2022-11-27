@@ -32,6 +32,19 @@ const DashBoardSideNav = () => {
             </li>
           </Fragment>
         )}
+        {!isUserLoading && userType === "admin" && (
+          <Fragment>
+            <li>
+              <Link to="/dashboard/all-sellers">All Sellers</Link>
+            </li>
+            <li>
+              <Link to="/dashboard/all-buyers">All Byers</Link>
+            </li>
+            <li>
+              <Link to="/dashboard/reported-phones">Reported Phones</Link>
+            </li>
+          </Fragment>
+        )}
       </ul>
     </aside>
   );
