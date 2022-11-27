@@ -1,15 +1,19 @@
-import React from "react";
+import React, { Fragment } from "react";
 import AdvertisedPhones from "../AdvertisedPhones/AdvertisedPhones";
 import Banner from "../Banner/Banner";
+import LearnMoreAndContactUs from "../LearnMoreAndContactUs/LearnMoreAndContactUs";
 import MobileBrands from "../MobileBrands/MobileBrands";
 
 const Home = () => {
   return (
-    <header>
-      <Banner />
+    <Fragment>
+      <header>
+        <Banner />
+      </header>
       <MobileBrands />
       <AdvertisedPhones />
-    </header>
+      <LearnMoreAndContactUs />
+    </Fragment>
   );
 };
 

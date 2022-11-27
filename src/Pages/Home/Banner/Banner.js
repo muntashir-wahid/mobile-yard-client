@@ -9,14 +9,15 @@ const Banner = () => {
     >
       <div className="hero-overlay bg-opacity-60"></div>
       <div className="hero-content text-center text-neutral-content">
-        <div className="max-w-md">
-          <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
+        <div className="max-w-xl">
+          <h1 className="mb-5 text-5xl font-bold">
+            Your pocket-friendly store
+          </h1>
           <p className="mb-5">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
+            <em>MobileYard</em> is a second-hand reselling mobile marketplace.
+            Here you can buy or sale your second-hand mobile phone with the best
+            deals.
           </p>
-          <button className="btn btn-primary">Get Started</button>
         </div>
       </div>
     </div>
