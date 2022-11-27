@@ -36,6 +36,7 @@ const Login = () => {
   // ------------------- //
   const loginFormSubmitHandler = (data) => {
     const { email, password } = data;
+    setLoginError("");
     setUserLogingLoading(true);
     logInUserHandler(email, password)
       .then(({ user }) => {
