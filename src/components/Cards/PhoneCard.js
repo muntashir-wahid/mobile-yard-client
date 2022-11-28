@@ -34,7 +34,7 @@ const PhoneCard = ({ phone, onBookPhone }) => {
 
   const reportPhoneHandler = (reportedPhone) => {
     fetch(
-      `http://localhost:5000/api/v1/phones/${reportedPhone._id}?report=true`,
+      `https://mobileyard-server.vercel.app/api/v1/phones/${reportedPhone._id}?report=true`,
       {
         method: "PUT",
       }

@@ -8,20 +8,18 @@ const ReportedPhones = () => {
     queryKey: ["reportedPhones"],
     queryFn: async () => {
       const res = await fetch(
-        "http://localhost:5000/api/v1/phones?report=true"
+        "https://mobileyard-server.vercel.app/api/v1/phones?report=true"
       );
       const data = res.json();
       return data;
     },
   });
 
-  console.log(isLoading, data);
-
   if (isLoading) {
     return (
       <Loader
         className="min-h-screen"
-        message="Please Wait!All orders loading..."
+        message="Please Wait!All reported phones are loading..."
       />
     );
   } else {

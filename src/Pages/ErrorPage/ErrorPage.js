@@ -1,10 +1,20 @@
-import React from "react";
-import { Link, useRouteError } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useNavigate, useRouteError } from "react-router-dom";
 import { BiMessageError, BiError } from "react-icons/bi";
 import bannerImg from "../../assets/images/error-page-banner.jpg";
+import { AuthContext } from "../../context/AuthProvider";
 
 const ErrorPage = () => {
   const error = useRouteError();
+  const { logOutHandler } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logOutHandler().then(() => {
+      localStorage.removeItem("accessToken");
+      navigate("/");
+    });
+  };
 
   return (
     <div
@@ -27,7 +37,9 @@ const ErrorPage = () => {
               Go to Home
             </button>
           </Link>
-          <button className="btn btn-accent btn-outline">Logout</button>
+          <button onClick={handleLogout} className="btn btn-accent btn-outline">
+            Logout
+          </button>
         </div>
       </div>
     </div>
