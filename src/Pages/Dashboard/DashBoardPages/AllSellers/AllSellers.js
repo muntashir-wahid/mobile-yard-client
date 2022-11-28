@@ -104,7 +104,7 @@ const AllSellers = () => {
                   <td>
                     {
                       <button
-                        onClick={deleteSellerHandler.bind(user)}
+                        onClick={deleteSellerHandler.bind(null, user)}
                         className="btn btn-sm btn-error"
                       >
                         Delete

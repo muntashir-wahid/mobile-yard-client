@@ -20,34 +20,36 @@ const AdvertisedPhones = () => {
     },
   });
 
-  return (
-    <SectionWrapper className="px-4 py-12">
-      <SecondaryHeading>Advertised Phones</SecondaryHeading>
-      {isLoading && (
-        <Loader
-          className="h-96"
-          message="Please wait!Advertised phones is loading..."
-        />
-      )}
-      <div className="grid grid-cols-1 lg:grid-cols-2 py-4 gap-4">
-        {!isLoading &&
-          data?.data?.phones.map((phone) => (
-            <PhoneCard
-              key={phone._id}
-              phone={phone}
-              onBookPhone={setBookedPhone}
-            />
-          ))}
-      </div>
+  if (!isLoading && data?.data?.phones.length !== 0) {
+    return (
+      <SectionWrapper className="px-4 py-12">
+        <SecondaryHeading>Advertised Phones</SecondaryHeading>
+        {isLoading && (
+          <Loader
+            className="h-96"
+            message="Please wait!Advertised phones is loading..."
+          />
+        )}
+        <div className="grid grid-cols-1 lg:grid-cols-2 py-4 gap-4">
+          {!isLoading &&
+            data?.data?.phones.map((phone) => (
+              <PhoneCard
+                key={phone._id}
+                phone={phone}
+                onBookPhone={setBookedPhone}
+              />
+            ))}
+        </div>
 
-      {bookedPhone && (
-        <PhoneBookingModal
-          bookingPhone={bookedPhone}
-          onClose={setBookedPhone}
-        />
-      )}
-    </SectionWrapper>
-  );
+        {bookedPhone && (
+          <PhoneBookingModal
+            bookingPhone={bookedPhone}
+            onClose={setBookedPhone}
+          />
+        )}
+      </SectionWrapper>
+    );
+  }
 };
 
 export default AdvertisedPhones;
