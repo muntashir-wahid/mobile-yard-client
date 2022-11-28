@@ -1,70 +1,43 @@
-# Getting Started with Create React App
+# MobileYard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[MobileYard](https://mobileyard-bab0c.web.app/) is a second-hand phone reselling marketplace. Here you can buy and sell your second-hand mobile phones. You can visit the live website [here](https://mobileyard-bab0c.web.app/).
 
-## Available Scripts
+## Features and functionalities
 
-In the project directory, you can run:
+- **Single-page web application**: MobileYard is a single-page web application built with react. website. Every time you see somethig new on the site you don't need to fetch a whole HTML, CSS and JavaScript file here. It will give you the feeling of useing mobile application on web.
 
-### `npm start`
+- **Client site routing**: : As it is a single-page web application it doesn't have the limitation of routing. You can visit multiple pages. And the routing happens on the client side.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Authentication system:** MobileYard has an authentication system. So you can create your account here. You can either create an account with your email and password or you can log in with your Google account. Here you can create an account as a seller or as a regular user. If you want to sell your second-hand phone you have to create a seller's account.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **API-powered website:** MobileYard is an API-powered dynamic website. All the data are coming from a database via a backend app and all the data are pretty much secure here.
 
-### `npm test`
+- **Payment gateway:** Here you can pay your booking mobile phone via Stripe.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Frameworks and technologies used to build this web application
 
-### `npm run build`
+### Client side
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- React
+- React router
+- Firebase
+- Tailwind CSS
+- Daisy UI
+- Stripe
+- Axios
+- React query
+- React hook from
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Server side
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Node.js
+- Express.js
+- MongoDB
+- JSON Web Token
+- Stripe
 
-### `npm run eject`
+## Admin credentials
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+adminEmail: muntashir@gmail.com
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+adminPassword: 123456
