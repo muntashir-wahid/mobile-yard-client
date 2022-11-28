@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { GoVerified } from "react-icons/go";
 
 const PhoneCard = ({ phone, onBookPhone }) => {
+  const [isSellerVerified, setIsSellerVerified] = useState(false);
   const {
     phoneName,
     image,
@@ -11,12 +13,22 @@ const PhoneCard = ({ phone, onBookPhone }) => {
     originalPrice,
     usedYears,
     description,
+    sellerEmail,
   } = phone;
+
   const date = new Date(postTime).toLocaleDateString("en-US", {
-    year: "numeric",
+    years: "numeric",
     month: "short",
     day: "numeric",
   });
+
+  useEffect(() => {
+    fetch(
+      `https://mobileyard-server.vercel.app/api/v1/users?email=${sellerEmail}&checkFor=isVerified`
+    )
+      .then((res) => res.json())
+      .then((data) => setIsSellerVerified(data.isVerified));
+  }, [sellerEmail]);
 
   return (
     <div className="card card-compact bg-base-100 shadow-xl">
@@ -26,7 +38,10 @@ const PhoneCard = ({ phone, onBookPhone }) => {
       <div className="card-body">
         <h3 className="card-title">{phoneName}</h3>
         <p className="font-semibold">
-          Posted at {date} by {sellerName}
+          Posted at {date} by {sellerName}{" "}
+          {isSellerVerified && (
+            <GoVerified className="text-blue-500 inline-block ml-[1px]" />
+          )}
         </p>
         <p>Posted from {sellerLocation}</p>
         <p>Resale price: ${resellingPrice}</p>

@@ -5,7 +5,7 @@ import bannerImg from "../../assets/images/error-page-banner.jpg";
 
 const ErrorPage = () => {
   const error = useRouteError();
-  console.log(error);
+
   return (
     <div
       className="hero min-h-screen"

@@ -6,6 +6,7 @@ import Blog from "../../Pages/Blog/Blog";
 import AddAPhone from "../../Pages/Dashboard/DashBoardPages/AddAPhone/AddAPhone";
 import AllBuyers from "../../Pages/Dashboard/DashBoardPages/AllBuyers/AllBuyers";
 import AllSellers from "../../Pages/Dashboard/DashBoardPages/AllSellers/AllSellers";
+import Checkout from "../../Pages/Dashboard/DashBoardPages/Checkout/Checkout";
 import MyBuyers from "../../Pages/Dashboard/DashBoardPages/MyBuyers/MyBuyers";
 import MyOrders from "../../Pages/Dashboard/DashBoardPages/MyOrders/MyOrders";
 import MyPhones from "../../Pages/Dashboard/DashBoardPages/MyPhones/MyPhones";
@@ -59,6 +60,18 @@ const router = createBrowserRouter([
         element: (
           <UserRoute>
             <MyOrders />
+          </UserRoute>
+        ),
+      },
+      {
+        path: "/dashboard/my-orders/checkout/:id",
+        loader: ({ params }) =>
+          fetch(
+            `https://mobileyard-server.vercel.app/api/v1/bookings/${params.id}`
+          ),
+        element: (
+          <UserRoute>
+            <Checkout />
           </UserRoute>
         ),
       },
