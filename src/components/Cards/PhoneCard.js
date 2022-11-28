@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { GoVerified } from "react-icons/go";
+import { MdBugReport } from "react-icons/md";
 
 const PhoneCard = ({ phone, onBookPhone }) => {
   const [isSellerVerified, setIsSellerVerified] = useState(false);
@@ -30,13 +32,37 @@ const PhoneCard = ({ phone, onBookPhone }) => {
       .then((data) => setIsSellerVerified(data.isVerified));
   }, [sellerEmail]);
 
+  const reportPhoneHandler = (reportedPhone) => {
+    fetch(
+      `http://localhost:5000/api/v1/phones/${reportedPhone._id}?report=true`,
+      {
+        method: "PUT",
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged && data.modifiedCount) {
+          toast.success(`You have reported ${reportedPhone.phoneName}`);
+        }
+      });
+  };
+
   return (
     <div className="card card-compact bg-base-100 shadow-xl">
       <figure>
         <img src={image} alt={phoneName} className="max-h-[32rem] w-full" />
       </figure>
       <div className="card-body">
-        <h3 className="card-title">{phoneName}</h3>
+        <div className="flex items-center gap-5">
+          <h3 className="card-title">{phoneName}</h3>
+          <button
+            onClick={reportPhoneHandler.bind(null, phone)}
+            className="btn btn-error btn-sm btn-outline"
+          >
+            Report
+            <MdBugReport className="inline-block text-lg" />
+          </button>
+        </div>
         <p className="font-semibold">
           Posted at {date} by {sellerName}{" "}
           {isSellerVerified && (

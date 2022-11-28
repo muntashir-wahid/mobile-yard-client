@@ -13,11 +13,6 @@ const MyOrders = () => {
     queryFn: async () => {
       const res = await fetch(
         `https://mobileyard-server.vercel.app/api/v1/bookings?email=${user?.email}`
-        // {
-        //   headers: {
-        //     authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        //   },
-        // }
       );
       const data = await res.json();
       return data;

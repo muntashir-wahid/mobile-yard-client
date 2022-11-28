@@ -19,6 +19,13 @@ const Checkout = () => {
           <CheckoutForm bookedPhone={loadedData} />
         </Elements>
       </div>
+
+      <div className="max-w-sm mx-auto mt-8 bg-base px-12 py-8 shadow-sm rounded-md text-slate-400">
+        <p>Test card number: 4242424242424242</p>
+        <p>Date: any future date</p>
+        <p>CVC: any 3 digit number</p>
+        <p>ZIP: any 5 digit number</p>
+      </div>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { Fragment, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import FormErrorMessage from "../../../../components/FormErrorMessage/FormErrorMessage";
 const CheckoutForm = ({ bookedPhone }) => {
   const stripe = useStripe();
@@ -89,6 +90,7 @@ const CheckoutForm = ({ bookedPhone }) => {
               .then((modifiedData) => {
                 if (modifiedData.acknowledged && modifiedData.modifiedCount) {
                   setIsPaying(false);
+                  toast.success("Payment is Done!");
                   setPaymentConfirmation(
                     `Payment completed.Your transaction id: ${paymentIntent.id}`
                   );
