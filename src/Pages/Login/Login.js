@@ -51,7 +51,41 @@ const Login = () => {
   };
 
   const handleGoogleSignIn = () => {
-    console.log(logInWithGoogleHandler);
+    logInWithGoogleHandler().then(({ user: createdUser }) => {
+      if (createdUser.uid) {
+        const user = {
+          name: createdUser.displayName,
+          email: createdUser.email,
+          accountType: "user",
+        };
+        setUserLogingLoading(true);
+        fetch("https://mobileyard-server.vercel.app/api/v1/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(user),
+        })
+          .then((res) => res.json())
+          .then((savedUser) => {
+            if (savedUser?.success && savedUser?.data?.user?._id) {
+              fetch(
+                `https://mobileyard-server.vercel.app/api/v1/jwt?email=${
+                  savedUser?.data?.user?.email
+                }&registered=${true}`
+              )
+                .then((res) => res.json())
+                .then((data) => {
+                  if (data.success) {
+                    localStorage.setItem("accessToken", data.token);
+                    setUserLogingLoading(false);
+                    navigate("/");
+                  }
+                });
+            }
+          });
+      }
+    });
   };
 
   if (userLogingLoding) {
