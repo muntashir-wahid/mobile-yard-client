@@ -4,7 +4,7 @@
 
 ## Features and functionalities
 
-- **Single-page web application**: MobileYard is a single-page web application built with react. website. Every time you see somethig new on the site you don't need to fetch a whole HTML, CSS and JavaScript file here. It will give you the feeling of useing mobile application on web.
+- **Single-page web application**: MobileYard is a single-page web application built with react. website. Every time you see something new on the site you don't need to fetch a whole HTML, CSS, and JavaScript file here. It will give you the feeling of using a mobile application on the web.
 
 - **Client site routing**: : As it is a single-page web application it doesn't have the limitation of routing. You can visit multiple pages. And the routing happens on the client side.
 
@@ -12,7 +12,7 @@
 
 - **API-powered website:** MobileYard is an API-powered dynamic website. All the data are coming from a database via a backend app and all the data are pretty much secure here.
 
-- **Payment gateway:** Here you can pay your booking mobile phone via Stripe.
+- **Payment gateway:** Here you can pay for your booking mobile phone via Stripe.
 
 ## Frameworks and technologies used to build this web application
 
