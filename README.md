@@ -4,9 +4,9 @@
 
 ## Features and functionalities
 
-- **Single-page web application**: MobileYard is a single-page web application built with react. website. Every time you see something new on the site you don't need to fetch a whole HTML, CSS, and JavaScript file here. It will give you the feeling of using a mobile application on the web.
+- **Single-page web application**: MobileYard is a single-page web application built with react. Every time you see something new on the site you don't need to fetch a whole HTML, CSS, and JavaScript file here. It will give you the feeling of using a mobile application on the web.
 
-- **Client site routing**: : As it is a single-page web application it doesn't have the limitation of routing. You can visit multiple pages. And the routing happens on the client side.
+- **Client site routing**: As it is a single-page web application it doesn't have the limitation of routing. You can visit multiple pages. And the routing happens on the client side.
 
 - **Authentication system:** MobileYard has an authentication system. So you can create your account here. You can either create an account with your email and password or you can log in with your Google account. Here you can create an account as a seller or as a regular user. If you want to sell your second-hand phone you have to create a seller's account.
 
